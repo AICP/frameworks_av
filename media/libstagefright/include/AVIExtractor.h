@@ -26,8 +26,11 @@
 namespace android {
 
 #define WAVE_FORMAT_AAC (0x00FF)
+<<<<<<< HEAD
 #define WAVE_FORMAT_MPEG (0x0050)
 #define WAVE_FORMAT_MPEGLAYER3 (0x0055)
+=======
+>>>>>>> 1f29358... Support AAC audio (WaveFormat = 0xFF) in AVI container.
 
 struct AVIExtractor : public MediaExtractor {
     AVIExtractor(const sp<DataSource> &dataSource);
