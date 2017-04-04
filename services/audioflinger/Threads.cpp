@@ -1525,10 +1525,6 @@ sp<AudioFlinger::EffectHandle> AudioFlinger::ThreadBase::createEffect_l(
             lStatus = chain->createEffect_l(effect, this, desc, id, sessionId, pinned);
 
             bool setVal = false;
-            if (mType == OFFLOAD || (mType == DIRECT && mIsDirectPcm)) {
-                setVal = true;
-            }
-
             if (lStatus != NO_ERROR) {
                 goto Exit;
             }

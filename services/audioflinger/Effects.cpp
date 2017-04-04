@@ -1229,8 +1229,7 @@ status_t AudioFlinger::EffectHandle::enable()
                 t->broadcast_l();
             }
             if (!effect->isOffloadable()) {
-                if (thread->type() == ThreadBase::OFFLOAD ||
-                   (thread->type() == ThreadBase::DIRECT && thread->mIsDirectPcm)) {
+                if (thread->type() == ThreadBase::OFFLOAD) {
                     PlaybackThread *t = (PlaybackThread *)thread.get();
                     t->invalidateTracks(AUDIO_STREAM_MUSIC);
                 }
@@ -1269,8 +1268,7 @@ status_t AudioFlinger::EffectHandle::disable()
     sp<ThreadBase> thread = effect->thread().promote();
     if (thread != 0) {
         thread->checkSuspendOnEffectEnabled(effect, false, effect->sessionId());
-        if ((thread->type() == ThreadBase::OFFLOAD) ||
-            (thread->type() == ThreadBase::DIRECT && thread->mIsDirectPcm)){
+        if (thread->type() == ThreadBase::OFFLOAD) {
             PlaybackThread *t = (PlaybackThread *)thread.get();
             Mutex::Autolock _l(t->mLock);
             t->broadcast_l();
@@ -1820,6 +1818,7 @@ size_t AudioFlinger::EffectChain::removeEffect_l(const sp<EffectModule>& effect,
             mEffects.removeAt(i);
             ALOGV("removeEffect_l() effect %p, removed from chain %p at rank %zu", effect.get(),
                     this, i);
+
 #ifdef DOLBY_ENABLE
             if (effect->suspended() && EffectDapController::instance()->isDapEffect(effect)) {
                 effect->setSuspended(false);

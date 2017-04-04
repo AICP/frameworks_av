@@ -575,6 +575,11 @@ status_t SampleTable::setSyncSampleParams(off64_t data_offset, size_t data_size)
         mSyncSamples[i] = ntohl(mSyncSamples[i]) - 1;
     }
 
+    if (mSyncSamples[i] == 0) {
+            ALOGE("b/32423862, unexpected zero value in stss");
+            continue;
+    }
+
     mSyncSampleOffset = data_offset;
     mNumSyncSamples = numSyncSamples;
 
