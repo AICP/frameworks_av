@@ -1281,9 +1281,6 @@ bool AudioRecord::AudioRecordThread::threadLoop()
             return true;
         }
     }
-    if (exitPending()) {
-        return false;
-    }
     nsecs_t ns =  mReceiver.processAudioBuffer();
     switch (ns) {
     case 0:
