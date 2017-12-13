@@ -32,6 +32,8 @@ namespace android {
 typedef Parcel::WritableBlob WritableBlob;
 typedef Parcel::ReadableBlob ReadableBlob;
 
+void mReserved;
+
 CameraMetadata::CameraMetadata() :
         mBuffer(NULL), mReserved(false), mLocked(false) {
 }
