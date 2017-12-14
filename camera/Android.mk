@@ -13,3 +13,5 @@
 # limitations under the License.
 
 include $(call all-subdir-makefiles)
+
+LOCAL_CFLAGS += -Wno-unused-private-field
