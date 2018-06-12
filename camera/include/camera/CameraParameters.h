@@ -19,6 +19,7 @@
 
 #include <utils/KeyedVector.h>
 #include <utils/String8.h>
+#include <camera/CameraParameters_EXT.h>
 
 namespace android {
 
@@ -37,7 +38,7 @@ struct Size {
     }
 };
 
-class CameraParameters
+class CameraParameters : public CameraParameters_EXT
 {
 public:
     CameraParameters();
@@ -554,6 +555,7 @@ public:
     static const char WHITE_BALANCE_CLOUDY_DAYLIGHT[];
     static const char WHITE_BALANCE_TWILIGHT[];
     static const char WHITE_BALANCE_SHADE[];
+    static const char WHITE_BALANCE_MANUAL_CCT[];
 
     // Values for effect settings.
     static const char EFFECT_NONE[];
@@ -677,11 +679,17 @@ public:
     // other modes.
     static const char FOCUS_MODE_CONTINUOUS_PICTURE[];
 
+    static const char FOCUS_MODE_MANUAL_POSITION[];
+
     // Values for light special effects
     // Low-light enhancement mode
     static const char LIGHTFX_LOWLIGHT[];
     // High-dynamic range mode
     static const char LIGHTFX_HDR[];
+
+    /* HTC parameters */
+    static const char SCENE_MODE_TEXT[];
+    static const char KEY_SMILEINFO_BYFACE_SUPPORTED[];
 
     /**
      * Returns the the supported preview formats as an enum given in graphics.h

@@ -106,6 +106,7 @@ const char CameraParameters::WHITE_BALANCE_DAYLIGHT[] = "daylight";
 const char CameraParameters::WHITE_BALANCE_CLOUDY_DAYLIGHT[] = "cloudy-daylight";
 const char CameraParameters::WHITE_BALANCE_TWILIGHT[] = "twilight";
 const char CameraParameters::WHITE_BALANCE_SHADE[] = "shade";
+const char CameraParameters::WHITE_BALANCE_MANUAL_CCT[] = "manual-cct";
 
 // Values for effect settings.
 const char CameraParameters::EFFECT_NONE[] = "none";
@@ -168,13 +169,37 @@ const char CameraParameters::FOCUS_MODE_FIXED[] = "fixed";
 const char CameraParameters::FOCUS_MODE_EDOF[] = "edof";
 const char CameraParameters::FOCUS_MODE_CONTINUOUS_VIDEO[] = "continuous-video";
 const char CameraParameters::FOCUS_MODE_CONTINUOUS_PICTURE[] = "continuous-picture";
+const char CameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual";
 
 // Values for light fx settings
 const char CameraParameters::LIGHTFX_LOWLIGHT[] = "low-light";
 const char CameraParameters::LIGHTFX_HDR[] = "high-dynamic-range";
 
+// HTC settings
+const char CameraParameters::SCENE_MODE_TEXT[] = "text";
+const char CameraParameters::KEY_SMILEINFO_BYFACE_SUPPORTED[] = "smileinfo-byface-supported";
+
+static String8 get_forced_value(String8 key, String8 value)
+{
+    if (key == "face-detection-values") return String8("off");
+    if (key == "face-detection") return String8("off");
+    return value;
+}
+
+static void add(DefaultKeyedVector<String8,String8> &map, String8 key, String8 value)
+{
+    value = get_forced_value(key, value);
+    map.add(key, value);
+}
+
+static void replaceValueFor(DefaultKeyedVector<String8,String8> &map, String8 key, String8 value)
+{
+    value = get_forced_value(key, value);
+    map.replaceValueFor(key, value);
+}
+
 CameraParameters::CameraParameters()
-                : mMap()
+    : CameraParameters_EXT(this), mMap()
 {
 }
 
@@ -191,14 +216,20 @@ String8 CameraParameters::flatten() const
         String8 k, v;
         k = mMap.keyAt(i);
         v = mMap.valueAt(i);
-
-        flattened += k;
-        flattened += "=";
-        flattened += v;
-        if (i != size-1)
-            flattened += ";";
+	if (v != "")
+	{
+       //    ALOGD("%s: %s\n", k.string(), v.string());
+           flattened += k;
+           flattened += "=";
+           flattened += v;
+           if (i != size-1)
+              flattened += ";";
+	}
+	else
+	{
+	   ALOGE("%s has no value\n", k.string());
+	}
     }
-
     return flattened;
 }
 
@@ -224,12 +255,12 @@ void CameraParameters::unflatten(const String8 &params)
         if (b == 0) {
             // If there's no semicolon, this is the last item.
             String8 v(a);
-            mMap.add(k, v);
+            add(mMap, k, v);
             break;
         }
 
         String8 v(a, (size_t)(b-a));
-        mMap.add(k, v);
+        add(mMap, k, v);
         a = b+1;
     }
 }
@@ -250,8 +281,16 @@ void CameraParameters::set(const char *key, const char *value)
         //XXX ALOGE("Value \"%s\"contains invalid character (= or ;)", value);
         return;
     }
+#ifdef QCOM_HARDWARE
+    // qcom cameras default to delivering an extra zero-exposure frame on HDR.
+    // The android SDK only wants one frame, so disable this unless the app
+    // explicitly asks for it
+    if (!get("hdr-need-1x")) {
+        replaceValueFor(mMap, String8("hdr-need-1x"), String8("false"));
+    }
+#endif
 
-    mMap.replaceValueFor(String8(key), String8(value));
+    replaceValueFor(mMap, String8(key), String8(value));
 }
 
 void CameraParameters::set(const char *key, int value)
