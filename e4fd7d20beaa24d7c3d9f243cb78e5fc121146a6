@@ -22,6 +22,30 @@
       "revId": "e4fd7d20beaa24d7c3d9f243cb78e5fc121146a6",
       "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93d41b76_6d435099",
+        "filename": "camera/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1649
+      },
+      "writtenOn": "2019-09-12T09:53:19Z",
+      "side": 1,
+      "message": "Yes, this won\u0027t build. Was already fixed in patchset 1",
+      "parentUuid": "de8c09c4_13f7ea62",
+      "range": {
+        "startLine": 72,
+        "startChar": 8,
+        "endLine": 72,
+        "endChar": 15
+      },
+      "revId": "e4fd7d20beaa24d7c3d9f243cb78e5fc121146a6",
+      "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b",
+      "unresolved": true
     }
   ]
 }
