@@ -508,6 +508,7 @@ void MediaFilter::onStart() {
     ALOGV("Handled kWhatStart.");
 }
 
+__attribute__((no_sanitize("unsigned-integer-overflow")))
 void MediaFilter::onInputBufferFilled(const sp<AMessage> &msg) {
     IOMX::buffer_id bufferID;
     CHECK(msg->findInt32("buffer-id", (int32_t*)&bufferID));
