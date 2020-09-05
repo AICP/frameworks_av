@@ -89,7 +89,7 @@ cc_defaults {
     },
 
     product_variables: {
-        lineage: {
+        aicp: {
             uses_legacy_wfd: {
                 srcs: [
                     "AHierarchicalStateMachine.cpp",

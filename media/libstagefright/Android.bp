@@ -250,7 +250,7 @@ cc_library {
             cflags: ["-DENABLE_STAGEFRIGHT_EXPERIMENTS"],
         },
 
-        lineage: {
+        aicp: {
             uses_legacy_wfd: {
                 cflags: ["-DLEGACY_WFD"],
                 srcs: ["SurfaceMediaSource.cpp"],
