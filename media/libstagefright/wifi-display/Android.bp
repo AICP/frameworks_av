@@ -51,7 +51,7 @@ cc_library_shared {
     },
 
     product_variables: {
-        lineage: {
+        aicp: {
             uses_legacy_wfd: {
                 cflags: ["-DLEGACY_WFD"],
             },

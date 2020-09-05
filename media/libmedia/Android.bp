@@ -330,7 +330,7 @@ cc_library {
     },
 
     product_variables: {
-        lineage: {
+        aicp: {
             uses_legacy_wfd: {
                 cflags: ["-DLEGACY_WFD"],
                 srcs: ["IHDCP.cpp"],
