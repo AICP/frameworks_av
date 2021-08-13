@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31c8aa77_89f2b8f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1682
+      },
+      "writtenOn": "2021-08-13T22:12:43Z",
+      "side": 1,
+      "message": "Needs testing on newer devices, on sdm660 with 10 blobs it brings wfd up again",
+      "revId": "d43c56e36fcd84c8fb7bbb63307bb00ca09a3025",
+      "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b"
+    }
+  ]
+}
