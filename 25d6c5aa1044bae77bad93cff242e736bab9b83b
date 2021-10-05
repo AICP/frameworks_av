@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca825945_d83b4cbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2021-10-05T17:03:48Z",
+      "side": 1,
+      "message": "full history: https://github.com/semdoc/frameworks_av/commits/r11.1_r46",
+      "revId": "25d6c5aa1044bae77bad93cff242e736bab9b83b",
+      "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b"
+    }
+  ]
+}
