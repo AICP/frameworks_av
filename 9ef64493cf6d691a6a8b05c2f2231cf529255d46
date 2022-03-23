@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f9451d_4d3b0e3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2022-03-23T21:17:42Z",
+      "side": 1,
+      "message": "Part of https://review.lineageos.org/q/topic:twelve-qcom-cam topic.",
+      "revId": "9ef64493cf6d691a6a8b05c2f2231cf529255d46",
+      "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b"
+    }
+  ]
+}
