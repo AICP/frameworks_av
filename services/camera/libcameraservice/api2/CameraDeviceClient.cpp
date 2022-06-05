@@ -100,7 +100,15 @@ CameraDeviceClient::CameraDeviceClient(const sp<CameraService>& cameraService,
     mInputStream(),
     mStreamingRequestId(REQUEST_ID_NONE),
     mRequestIdCounter(0),
+    mPrivilegedClient(false),
     mOverrideForPerfClass(overrideForPerfClass) {
+
+    char value[PROPERTY_VALUE_MAX];
+    property_get("persist.vendor.camera.privapp.list", value, "");
+    String16 packagelist(value);
+    if (packagelist.contains(clientPackageName.string())) {
+        mPrivilegedClient = true;
+    }
 
     ATRACE_CALL();
     ALOGI("CameraDeviceClient %s: Opened", cameraId.string());
@@ -646,7 +654,7 @@ binder::Status CameraDeviceClient::isSessionConfigurationSupported(
     mProviderManager->isLogicalCamera(mCameraIdStr.string(), &physicalCameraIds);
     res = SessionConfigurationUtils::convertToHALStreamCombination(sessionConfiguration,
             mCameraIdStr, mDevice->info(), getMetadata, physicalCameraIds, streamConfiguration,
-            mOverrideForPerfClass, &earlyExit);
+            mOverrideForPerfClass, &earlyExit, mPrivilegedClient);
     if (!res.isOk()) {
         return res;
     }
@@ -1696,7 +1704,7 @@ binder::Status CameraDeviceClient::switchToOffline(
         bool isCompositeStream = false;
         for (const auto& gbp : mConfiguredOutputs[streamId].getGraphicBufferProducers()) {
             sp<Surface> s = new Surface(gbp, false /*controlledByApp*/);
-            isCompositeStream = camera3::DepthCompositeStream::isDepthCompositeStream(s) |
+            isCompositeStream = camera3::DepthCompositeStream::isDepthCompositeStream(s) ||
                 camera3::HeicCompositeStream::isHeicCompositeStream(s);
             if (isCompositeStream) {
                 auto compositeIdx = mCompositeStreamMap.indexOfKey(IInterface::asBinder(gbp));
