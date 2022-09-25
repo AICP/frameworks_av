@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cde9630e_6b9f275c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2022-09-25T15:10:03Z",
+      "side": 1,
+      "message": "/home/doc/aicp13/frameworks/av/media/libaaudio/src/utility/AAudioUtilities.cpp:2\n38:41: error: parameter \u0027policy\u0027 is unused [misc-unused-parameters,-warnings-as-\nerrors]\n        aaudio_allowed_capture_policy_t policy,\n                                        ^~~~~~\n                                         /*policy*/\n",
+      "revId": "23950c90bfc55f73ff7f500422e204e511dfb2ba",
+      "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b"
+    }
+  ]
+}
